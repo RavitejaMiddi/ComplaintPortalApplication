@@ -4,7 +4,7 @@ import com.portal.entities.Engineer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface IEngineerRepository {
+public interface IEngineerRepository extends JpaRepository<Engineer, Integer> {
 
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 //@Repository annotation is used to indicate that the class provides the mechanism for storage, retrieval, search, update and delete operation on objects
 
-public interface IComplaintRepository {
+public interface IComplaintRepository extends JpaRepository<Complaint, Integer> {
 
 
 }

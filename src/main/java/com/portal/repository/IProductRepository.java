@@ -4,7 +4,7 @@ import com.portal.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface IProductRepository {
+public interface IProductRepository extends JpaRepository<Product,String> {
 
 
 }
