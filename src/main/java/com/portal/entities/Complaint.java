@@ -38,7 +38,7 @@ public class Complaint {
     @Column(name = "status")        //@Column annotation is used to define the name of column
     private ComplaintStatus status; // open , resolve online , resolve after home visit , resolved , closed
 
-    @JsonIgnore
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "engineer_engineer_id")
     private Engineer engineer;

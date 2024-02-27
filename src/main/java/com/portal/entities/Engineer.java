@@ -18,16 +18,14 @@ import java.util.List;
 public class Engineer {
 
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id//@Id annotation specifies the primary key of an entity
     @Column(name = "ENGINEER_ID")
     private int engineerId; // treat like login id
 
     private String engineerName;
 
-
     private EngineerDomain domain; // like washing machine , AC, Mobile phone
-
 
     @JsonIgnore //@JsonIgnore annotation is used at the class level to ignore fields
     @OneToMany(mappedBy = "engineer", cascade = CascadeType.ALL, orphanRemoval = true)
