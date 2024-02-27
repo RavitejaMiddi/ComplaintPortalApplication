@@ -14,12 +14,10 @@ import java.util.List;
 public interface IComplaintService {
 
 	// Method to book the complaint 
-	public boolean bookComplaint(Complaint complaint,int engineerId)throws OutOfWarrantyException,InValidComplaintIdException,InValidEngineerIdException;
+	public boolean bookComplaint(Complaint complaint)throws OutOfWarrantyException,InValidComplaintIdException,InValidEngineerIdException;
 	
 	// Method to change the complaint Status
 	public ComplaintStatus changeComplaintStatus(int complaintId,ComplaintStatus status);
-	
-
 
 	
 	// Method to get all the open complaints of client
@@ -31,7 +29,6 @@ public interface IComplaintService {
 	// Method to get the product based on complaint
 	public Product getProductByComplaint(int complaintId)throws InValidComplaintIdException;
 
-	public List<Engineer> getAllEngineers() throws NoEngineerFoundException;
-	public List<Complaint> getAllOpenComplaints(int complaintId)throws NoComplaintFoundException;
+	public List<Complaint> getAllOpenComplaints()throws NoComplaintFoundException;
 }
 

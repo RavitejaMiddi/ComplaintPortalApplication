@@ -51,12 +51,10 @@ public class IComplaintServiceImpl implements IComplaintService {
 	// existsById() is default method in repository it gives object by taking Id
 	// Method to book the complaint 
 	@Override
-	public boolean bookComplaint(Complaint complaint,int engineerId){
-		
+	public boolean bookComplaint(Complaint complaint){
 		if(! productRepository.existsById(complaint.getProductModelNumber())) {
 			throw new InValidModelNumberException("Product model doesn't exists");
-		}	
-	
+		}
 		Product product = productRepository.getById(complaint.getProductModelNumber());
 		
 		LocalDate warrantyDate = product.getWarrantyDate();
@@ -64,16 +62,6 @@ public class IComplaintServiceImpl implements IComplaintService {
 		if(warrantyDate.isBefore(LocalDate.now())) {
 			throw new OutOfWarrantyException("Warranty is out of date");
 		}
-
-
-		if( engineerRepository.existsById(engineerId)) {
-			Engineer engineer = engineerRepository.getById(engineerId);
-			complaint.setEngineer(engineer);
-		}
-		else {
-			throw new InValidEngineerIdException("Engineer doesn't exists");
-		}
-		
 		Optional<Complaint> complaintOpt=complaintRepository.findById(complaint.getComplaintId());
 		
 		if(complaintOpt.isPresent()) {
@@ -142,21 +130,17 @@ public class IComplaintServiceImpl implements IComplaintService {
 	// equals() method compares two objects
 	// Method to get all the open complaints of client
 	@Override
-	public List<Complaint> getAllOpenComplaints(int complaintId) throws NoComplaintFoundException {
+	public List<Complaint> getAllOpenComplaints() throws NoComplaintFoundException {
 		
 		List<Complaint> complaintList = complaintRepository.findAll() ;
 		
 		List<Complaint> openComplaints = new ArrayList<>();
-		if(complaintRepository.existsById(complaintId)) {
+
 			for(Complaint c : complaintList) {
 				if ( c.getStatus() == ComplaintStatus.OPEN)	{
 						openComplaints.add(c);
 				}
 			}
-		}
-		else {
-	           throw new NoComplaintFoundException ("Complaint Id does not exists");
-		}
 		
 		if(openComplaints.size() == 0) {
 			throw new NoComplaintFoundException("No Open Complaints Found");
@@ -208,15 +192,5 @@ public class IComplaintServiceImpl implements IComplaintService {
 		}
 		
 	}
-	
-	
-	@Override
-	public List<Engineer> getAllEngineers() throws NoEngineerFoundException {
-		// TODO Auto-generated method stub
-		List<Engineer> engineerList=engineerRepository.findAll();
-		if(engineerList.size()==0)
-			throw new NoEngineerFoundException("Engineers data is empty");
-		else		
-		return engineerList;
-	}
+
 	}
