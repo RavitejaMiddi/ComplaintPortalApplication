@@ -31,13 +31,10 @@ public class IEngineerServiceImpl implements IEngineerService{
     @Override
     public List<Engineer> getAllEngineers() throws NoEngineerFoundException {
         List<Engineer> engineerList = new ArrayList<>();
-
         List<Engineer> engineerList1 =  engineerRepository.findAll();
         for(Engineer engineer:engineerList1) {
-
                 engineerList.add(engineer);
             }
-
         //size() is  gives the number of objects in list
         if(engineerList.size()!=0) {
             return engineerList;
@@ -45,7 +42,6 @@ public class IEngineerServiceImpl implements IEngineerService{
         else {
             throw new NoEngineerFoundException("No Engineer Found");
         }
-
     }
 
     @Override
@@ -59,6 +55,18 @@ public class IEngineerServiceImpl implements IEngineerService{
             engineerRepository.save(engineer);
         }
     }
+
+    @Override
+    public Optional<Engineer> deleteEngineer(int engineerId) {
+        Optional<Engineer> optionalDelete = engineerRepository.findById(engineerId);
+        if(optionalDelete.isPresent()) {
+            engineerRepository.deleteById(engineerId);
+            return optionalDelete;
+        }
+        else
+            throw new NoEngineerFoundException("Engineer with "+engineerId+" does not exists");
+    }
+
 
     @Override
     public List<Complaint> getAllOpenComplaints(int engineerId) throws InValidEngineerIdException {
@@ -119,8 +127,8 @@ public class IEngineerServiceImpl implements IEngineerService{
 
     @Override
     public void changeComplaintStatus(int complaintId, ComplaintStatus status) throws InValidStatusException, InValidComplaintIdException {
-        Complaint complaint=complaintRepository.getById(complaintId);
-        if(complaintRepository.existsById(complaintId)) {
+        Complaint complaint = complaintRepository.getById(complaintId);
+        if (complaintRepository.existsById(complaintId)) {
 
             switch (status) {
 
@@ -141,8 +149,7 @@ public class IEngineerServiceImpl implements IEngineerService{
                     break;
             }
             complaintRepository.save(complaint);
-        }
-        else {
+        } else {
             throw new InValidComplaintIdException("Complaint Not Found");
         }
 

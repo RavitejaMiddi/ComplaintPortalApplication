@@ -28,6 +28,11 @@ public class EngineerController {
         service.addEngineer(engineer);
         return new ResponseEntity<String>("Engineer added successfully",HttpStatus.OK) ;
     }
+    @DeleteMapping("/deleteEngineer/{engineerId}")
+    public ResponseEntity<?> deleteDeveloper(@PathVariable("engineerId") int engineerId){
+        service.deleteEngineer(engineerId);
+        return new ResponseEntity<String>("Engineer Deleted Succesfully",HttpStatus.OK);
+    }
 
     @GetMapping("/getAllEngineers")
     public ResponseEntity<List<Engineer>> getAllEngineers() {

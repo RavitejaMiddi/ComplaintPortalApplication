@@ -18,7 +18,7 @@ import java.util.List;
 public class Engineer {
 
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id//@Id annotation specifies the primary key of an entity
     @Column(name = "ENGINEER_ID")
     private int engineerId; // treat like login id
