@@ -79,13 +79,13 @@ public class ComplaintController {
         return new ResponseEntity<List<Complaint>>(list, HttpStatus.OK);
     }
 
-    //@GetMapping Annotation is used for mapping HTTP GET requests onto specific handler methods
-    @GetMapping("/getEngineerByComplaintId/{complaintId}")
-    public ResponseEntity<Engineer> getEngineerByComplaintId(@PathVariable("complaintId") int complaintId) {
-
-        Engineer engineer = complaintService.getEngineer(complaintId);
-        return new ResponseEntity<Engineer>(engineer, HttpStatus.OK);
-    }
+//    //@GetMapping Annotation is used for mapping HTTP GET requests onto specific handler methods
+//    @GetMapping("/getEngineerByComplaintId/{complaintId}")
+//    public ResponseEntity<Engineer> getEngineerByComplaintId(@PathVariable("complaintId") int complaintId) {
+//
+//        Engineer engineer = complaintService.getEngineer(complaintId);
+//        return new ResponseEntity<Engineer>(engineer, HttpStatus.OK);
+//    }
 
     //@GetMapping is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod. GET)
     @GetMapping("/getProductByComplaintId/{complaintId}")
